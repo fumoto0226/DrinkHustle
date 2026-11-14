@@ -1,0 +1,45 @@
+{
+  "name": "线条效果一",
+  "recorded": "2026-11-05",
+  "algorithm": {
+    "baseWidth": 2.0,
+    "swell": 2.1,
+    "jitterAmplitude": 0.4,
+    "biasGain": 6,
+    "bendGain": 6,
+    "biasSwayOffset": 0.37,
+    "sampleStep": 0.5,
+    "minSegments": 16,
+    "tangentDistance": 2,
+    "curvatureArmSamples": 3,
+    "gaussianRadiusSamples": 20,
+    "gaussianSigmaSamples": 7,
+    "jitterKnotSpacing": 22,
+    "minJitterKnots": 4
+  },
+  "bottle04": {
+    "viewBox": "0 0 54 80",
+    "inkWidthScale": 0.65,
+    "waterMaskWidthScale": 0.38,
+    "waterMaskSeedOffset": 101
+  },
+  "inkFilter": {
+    "type": "fractalNoise",
+    "baseFrequency": 0.08,
+    "numOctaves": 2,
+    "seed": "17 + bottleIndex * 7",
+    "displacementScale": 1.8,
+    "xChannel": "R",
+    "yChannel": "G"
+  },
+  "waterFilter": {
+    "type": "fractalNoise",
+    "baseFrequency": 0.48,
+    "numOctaves": 2,
+    "seed": "23 + bottleIndex * 5",
+    "displacementScale": 0.42,
+    "xChannel": "R",
+    "yChannel": "G"
+  },
+  "sourceSHA256": "5b6d0ac25dddeb8d36b2c9f3a08111ced6c99e3605f0e8575f9ca740105354f8"
+}

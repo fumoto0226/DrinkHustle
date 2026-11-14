@@ -1,0 +1,39 @@
+* { box-sizing: border-box; }
+html,body { margin:0; width:100%; height:100%; background:white; }
+body { overflow:hidden; overscroll-behavior:none; color:#252525; font-family:ui-rounded,"Hiragino Sans GB","PingFang SC",sans-serif; -webkit-tap-highlight-color:transparent; }
+button,a { touch-action:manipulation; }
+button { font:inherit; }
+#game { position:relative; isolation:isolate; width:min(100%,480px); height:100dvh; min-height:480px; margin:auto; }
+.game-header { position:absolute; top:max(26px,env(safe-area-inset-top)); left:7%; right:7%; display:flex; align-items:center; justify-content:space-between; z-index:150; }
+.level { font-size:13px; letter-spacing:.12em; }
+#level-number { font-variant-numeric:tabular-nums; }
+#restart { border:0; background:none; padding:8px 0 8px 12px; font-size:12px; color:#777; cursor:pointer; }
+#restart span { display:inline-block; padding-left:5px; font-size:18px; vertical-align:-1px; }
+#bottles,#slots { position:absolute; inset:0; pointer-events:none; }
+.bottle { position:absolute; display:block; padding:0; border:0; background:none; cursor:pointer; pointer-events:none; outline:none; -webkit-user-select:none; user-select:none; }
+.bottle-align { position:relative; padding-top:var(--by,0); }
+.bottle svg { display:block; width:var(--bw,100%); height:auto; margin:0 auto; overflow:visible; pointer-events:none; }
+.bottle.covered { cursor:pointer; }
+.bottle .liquid,.bottle .ink-outline { transition:opacity 150ms ease; }
+.bottle.covered .liquid { opacity:.56; }
+.bottle.covered .ink-outline { opacity:.58; }
+.bottle[data-feedback="blocker"] .ink-outline { opacity:1; }
+.bottle:focus-visible { outline:1px dashed #aaa; outline-offset:5px; border-radius:8px; }
+.slot-ghost { position:absolute; }
+.slot-ghost svg { display:block; width:100%; height:auto; overflow:visible; }
+.slot-ghost path { stroke:#dededb; stroke-width:1.5; stroke-dasharray:3.2 4; stroke-linecap:round; fill:none; }
+#stream { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:60; }
+#stream path { stroke:none; }
+#clear-fx { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:120; }
+#auto { position:absolute; bottom:max(20px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:12px; padding:10px 17px; border:1px solid #333; border-radius:999px; background:#fff; color:#222; font-size:12px; line-height:1.4; cursor:pointer; z-index:150; }
+.auto-indicator { width:11px; height:11px; border:1px solid #333; border-radius:50%; background:white; }
+#auto[aria-checked="true"] .auto-indicator { background:#222; box-shadow:inset 0 0 0 2px #fff; }
+#result { position:absolute; top:21%; left:12%; right:12%; padding:24px; text-align:center; background:rgba(255,255,255,.97); z-index:130; }
+#result[hidden] { display:none; }
+.result-mark { color:#4bc598; font-size:40px; font-weight:300; }
+#result h1 { font-size:22px; font-weight:500; letter-spacing:.12em; margin:14px 0 24px; }
+#next { border:1px solid #292929; border-radius:999px; background:white; color:#292929; padding:11px 24px; cursor:pointer; font-size:13px; }
+#next span { padding-left:14px; }
+@media(max-height:620px) { .game-header { top:12px; } }
+.bottle-hit { pointer-events:visibleFill; fill:transparent; stroke:none; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }

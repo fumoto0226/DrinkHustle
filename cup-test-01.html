@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>杯子测试 01 · 美术 01</title>
+<link rel="stylesheet" href="heap.css">
+</head>
+<body>
+<main id="game" aria-label="归色倒水游戏">
+  <header class="game-header"><div class="level">第 <span id="level-number">01</span> 关</div><button id="restart" type="button" aria-label="重新开始这一关">重新开始 <span aria-hidden="true">↻</span></button></header>
+  <div id="slots"></div>
+  <div id="bottles"></div>
+  <svg id="stream" aria-hidden="true"><path /></svg>
+  <svg id="clear-fx" aria-hidden="true"></svg>
+  <button id="auto" type="button" role="switch" aria-checked="false">自动消除<span class="auto-indicator" aria-hidden="true"></span></button>
+  <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+  <section id="result" hidden aria-label="通关"><div class="result-mark" aria-hidden="true">✳</div><h1>归色完成</h1><button id="next" type="button">再玩一关 <span aria-hidden="true">→</span></button></section>
+</main>
+<script src="art-01/bottle-art.js"></script>
+<script src="art-01/ink-stroke.js"></script>
+<script src="heap-shapes.js"></script>
+<script src="heap-level.js"></script>
+<script src="heap-rules.js"></script>
+<script src="heap-game.js?v=water-edges"></script>
+</body>
+</html>

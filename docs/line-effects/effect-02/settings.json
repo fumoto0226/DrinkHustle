@@ -1,0 +1,50 @@
+{
+  "name": "线条效果二 · Billybutton 近似模拟",
+  "recorded": "2026-11-05",
+  "source": "Billybutton.brush / Brush.archive",
+  "missingSource": "Procreate_Library/Alpine_Shape.png",
+  "rendering": "seeded overlapping solid vector nib stamps, nonzero fill",
+  "algorithm": {
+    "baseWidth": 3.55,
+    "spacing": 0.0715088695,
+    "spacingJitter": 0.4776262045,
+    "lateralJitter": 0.0727313533,
+    "linearJitter": 0.1099295318,
+    "sizeJitter": 0.2112026513,
+    "roundnessJitter": 0.1350364685,
+    "roundnessXJitter": 0.0842589661,
+    "randomRotation": true,
+    "randomFlipX": true,
+    "randomFlipY": true,
+    "grainDepth": 0,
+    "detailScale": 2.4,
+    "lateralJitterMultiplier": 1.65,
+    "sizeWaves": [
+      0.07,
+      0.035
+    ],
+    "cornerBreakProbability": 0.22,
+    "cornerThreshold": 0.32,
+    "cornerMinSeparation": 5,
+    "gapHalfWidthRange": [
+      0.07,
+      0.12
+    ],
+    "gapTaperWidth": 0.35
+  },
+  "bottleWidthScale": 0.65,
+  "waterMaskWidthScale": 0.38,
+  "sourceSHA256": "562943884c3adb1a3bcaf648939cc24c54194634fcfc0784175e939425636df5",
+  "performance": {
+    "sharedPathSampleStep": 0.12,
+    "cacheStrokeByPathSeedScaleAndBreaks": true,
+    "precomputedExtents": true
+  },
+  "waterEdges": {
+    "mask": "periodic normal offsets .22/.12",
+    "interfaces": "fixed three-frequency offsets .18/.11/.07",
+    "surface": "192 vertices periodic offsets .19/.12",
+    "breaks": false,
+    "rendering": "lightweight solid contours approximating brush edges, not per-frame stamps"
+  }
+}

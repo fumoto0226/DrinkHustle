@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; background: #fff; overflow: hidden; }
+body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+#game { position: relative; width: min(100%, 480px); height: 100%; height: 100dvh; margin: auto; isolation: isolate; }
+#bottles { position: absolute; top: 48%; left: 4%; width: 92%; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7.8%; }
+.bottle { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; touch-action: manipulation; transform-origin: 53.030303% 4.324324%; outline: none; }
+.bottle-align { position: relative; padding-top: var(--by, 0); }
+.bottle svg { display: block; width: var(--bw, 100%); margin: 0 auto; height: auto; overflow: visible; pointer-events: none; }
+.bottle:focus-visible { outline: 2px dashed #aaa; outline-offset: 5px; border-radius: 8px; }
+#stream { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 5; }
+#stream path { stroke: none; }

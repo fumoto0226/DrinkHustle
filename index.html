@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>地摊生存挑战</title><link rel="stylesheet" href="shop.css?v=wager-tiers"></head>
+<body>
+<main id="start-screen" aria-labelledby="game-title">
+  <div class="start-content">
+    <h1 id="game-title">地摊生存挑战</h1>
+    <svg class="start-illustration" viewBox="0 0 280 162" aria-hidden="true" fill="#fff" stroke="#222" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- The ground cloth widens toward the viewer. -->
+      <path d="M64 78Q140 75 216 78L247 146Q140 151 33 146Z"/>
+      <path d="M62 94l-5 12m163-10 6 12M52 139l15 1m145 0 15-1" fill="none" stroke-width="1.3"/>
+      <!-- Seated vendor -->
+      <rect x="123" y="50" width="34" height="36" rx="2"/>
+      <rect x="116" y="79" width="23" height="13" rx="2"/>
+      <rect x="141" y="79" width="23" height="13" rx="2"/>
+      <circle cx="140" cy="33" r="19"/>
+      <!-- Two bottles -->
+      <g transform="translate(83 79) rotate(-8)">
+        <path d="M-5 0H5v10q6 3 6 9v17q-11 3-22 0V19q0-6 6-9Z"/>
+        <path d="M-8 21q8-3 16 0v12q-8 2-16 0Z" fill="#f1cf43" stroke="none"/>
+        <rect x="-6" y="-3" width="12" height="5" rx="1"/>
+      </g>
+      <g transform="translate(111 96) rotate(6)">
+        <path d="M-5 0H5v9q6 3 6 9v13q-11 3-22 0V18q0-6 6-9Z"/>
+        <path d="M-8 19q8-2 16 0v9q-8 2-16 0Z" fill="#52b3ed" stroke="none"/>
+        <rect x="-6" y="-3" width="12" height="5" rx="1"/>
+      </g>
+      <!-- Two cups, with visible rims -->
+      <g transform="translate(176 99)">
+        <path d="M-12 0l4 18q8 3 16 0l4-18Z"/>
+        <path d="M-8 6q8 2 16 0l-2 10q-6 2-12 0Z" fill="#f36757" stroke="none"/>
+        <ellipse rx="12" ry="3.6"/>
+      </g>
+      <g transform="translate(202 112)">
+        <path d="M-12 0l4 18q8 3 16 0l4-18Z"/>
+        <path d="M-8 6q8 2 16 0l-2 10q-6 2-12 0Z" fill="#a783ed" stroke="none"/>
+        <ellipse rx="12" ry="3.6"/>
+      </g>
+    </svg>
+    <p class="record-label">最高记录</p>
+    <p id="best-record">暂无</p>
+    <button id="continue-game" class="primary-action" type="button" hidden></button>
+    <button id="start-game" class="primary-action" type="button">开始游戏</button>
+  </div>
+</main>
+<main id="shop" hidden data-story="intro" aria-label="杯子小店，美术 01"><header><div class="coins"><span>＄</span><div class="balance"><b id="balance" aria-label="金币余额" aria-live="polite">0</b></div></div><div class="day-controls"><b id="day-number">第 1 天</b><div class="day-actions"><button id="open-scavenge" hidden type="button" aria-haspopup="dialog">拾荒</button><button id="close-day" type="button">收摊</button></div></div><button id="wagers" type="button" hidden aria-haspopup="dialog">对赌</button><button id="preorders" type="button" hidden aria-haspopup="dialog">预订</button><button class="setting" type="button" aria-haspopup="dialog">设置</button><p id="queue-count" aria-live="polite">还有 5 人在排队</p><p id="rent-today">明日付货款 10 金币</p></header><div id="customers"></div>
+<aside id="skip-tip" class="game-tip" hidden aria-label="如果没有饮料可以卖给这位顾客，可以点「撵走」，换下一位。">
+  <button id="close-skip-tip" class="tip-close" type="button" aria-label="关闭提示">×</button>
+  <p>如果没有饮料可以卖给这位顾客，可以点「撵走」，换下一位。</p>
+  <button id="confirm-skip-tip" class="tip-confirm" type="button">知道了</button>
+</aside>
+<div id="mentor" class="person" hidden><div class="head"><span class="mentor-hat" aria-hidden="true"></span><svg class="mentor-lips" viewBox="0 0 32 18" aria-hidden="true"><path fill="#c52d48" d="M1 9C7 7 9 2 12 3c2 0 3 2 4 2s2-2 4-2c3-1 5 4 11 6-4 4-9 7-15 7S5 13 1 9Z"/><path d="M4 9q12 4 24 0" fill="none" stroke="#831b32" stroke-width="1.3" stroke-linecap="round"/></svg></div><div class="body"></div></div>
+<section id="story" aria-label="开店剧情" hidden><strong>地摊主理人</strong><p id="story-text" aria-live="polite"></p><div class="story-actions"><button id="story-refuse" type="button" hidden>不交</button><button id="story-next" type="button">继续</button></div></section><section id="table" aria-label="桌面，点击空处放回选中的杯子"><div id="cart-area"></div><p id="item-count">物品总数：0</p><div id="fruit-market" aria-label="今日水果单份价格"></div></section><div id="cups"></div><svg id="shop-stream" aria-hidden="true"><path/></svg><aside id="return-tip" class="game-tip" hidden aria-label="把一只杯子装满并选中，再点箱子里的空白处，就能把它放回去，腾出一个手位。">
+  <button id="close-return-tip" class="tip-close" type="button" aria-label="关闭提示">×</button>
+  <p>把一只杯子装满并选中，再点箱子里的空白处，就能把它放回去，腾出一个手位。</p>
+  <button id="confirm-return-tip" class="tip-confirm" type="button">知道了</button>
+</aside><div id="slots" aria-label="三个手持位置"><i></i><i></i><i></i></div><p id="hint" role="status" aria-live="polite">拿起杯子，把相同颜色倒在一起</p><footer><button id="upgrade" aria-haspopup="dialog"><span id="upgrade-badge" class="footer-badge" hidden></span>升级 <small>▲</small></button><button id="inventory" aria-haspopup="dialog"><span id="inventory-badge" class="footer-badge" hidden></span>仓库 <small>▲</small></button></footer>
+<dialog id="upgrade-menu" aria-labelledby="upgrade-title">
+  <div class="upgrade-heading"><h2 id="upgrade-title">升级</h2><button id="close-upgrade" aria-label="关闭升级菜单">×</button></div>
+  <button id="buy-scavenge-upgrade" class="extra-upgrade" type="button"><span><span></span><small></small></span><strong></strong></button>
+  <button id="buy-daily"><span>增加每日顾客<small id="daily-count"></small></span><strong id="daily-price"></strong></button>
+  <button id="buy-wallet"><span>顾客钱包<small id="wallet-level"></small></span><strong id="wallet-price"></strong></button>
+  <button id="buy-merchant-type"><span>解锁商人箱型<small id="merchant-type-level"></small></span><strong id="merchant-type-price"></strong></button>
+  <button id="buy-merchant-count"><span>增加商人商品<small id="merchant-count-level"></small></span><strong id="merchant-count-price"></strong></button>
+  <div id="extra-upgrades"></div>
+  <p id="upgrade-status" aria-live="polite"></p>
+</dialog>
+<dialog id="prop-catalog" aria-labelledby="prop-title">
+  <div class="upgrade-heading">
+    <h2 id="prop-title">道具一览</h2>
+    <form method="dialog"><button class="settings-close" aria-label="关闭道具一览">×</button></form>
+  </div>
+  <h3>价格影响器</h3>
+  <div id="influencer-previews"></div>
+  <p>从明天起按目标价成交，持续 3 天。原行情照常变化，到期后恢复按当时的行情成交。</p>
+</dialog>
+<dialog id="settings-menu" aria-labelledby="settings-title">
+  <div class="upgrade-heading"><h2 id="settings-title">设置</h2><form method="dialog"><button class="settings-close" aria-label="关闭设置">×</button></form></div>
+  <button id="settings-save" class="primary-action" type="button">保存并返回首页</button>
+  <button id="settings-restart" class="primary-action" type="button">重新开始</button>
+  <button id="settings-abandon" class="primary-action" type="button">放弃本局</button>
+  <p id="settings-status" role="status"></p>
+</dialog>
+<dialog id="trader-menu" aria-labelledby="trader-title">
+  <h2 id="trader-title">操盘手</h2>
+  <p>我跟你谈个生意。</p>
+  <p id="trader-terms"></p>
+  <p id="trader-status" role="status"></p>
+  <div class="rent-warning-actions">
+    <button id="trader-decline" type="button">不同意</button>
+    <button id="trader-accept" type="button" value="confirm"></button>
+  </div>
+</dialog>
+<dialog id="wager-offer" aria-labelledby="wager-title">
+  <h2 id="wager-title">对赌客</h2>
+  <p id="wager-terms"></p>
+  <ul id="wager-history" aria-label="最近三天基础行情"></ul>
+  <form method="dialog">
+    <div class="wager-prediction" role="group" aria-label="预测价">
+      <span>预测价</span>
+      <input id="wager-whole" aria-label="个位" inputmode="numeric" pattern="[0-9]" maxlength="1" required>
+      <span aria-hidden="true">.</span>
+      <input id="wager-decimal" aria-label="十分位" inputmode="numeric" pattern="[0-9]" maxlength="1" required>
+      <span>金币</span>
+    </div>
+    <label>本金 <input id="wager-stake" type="range" min="1" step="1" value="1"> <output id="wager-stake-value" for="wager-stake"></output></label>
+    <label>返还倍率 <select id="wager-multiplier">
+      <option value="1.1">1.1 倍（±0.5）</option>
+      <option value="1.2">1.2 倍（±0.4）</option>
+      <option value="1.5">1.5 倍（±0.3）</option>
+      <option value="2" selected>2 倍（±0.2）</option>
+      <option value="3">3 倍（±0.1）</option>
+    </select></label>
+    <p id="wager-preview" aria-live="polite"></p>
+    <div class="rent-warning-actions"><button value="decline" formnovalidate>不赌</button><button id="wager-sign" value="sign">确认下注</button></div>
+  </form>
+</dialog>
+<dialog id="wager-book" aria-labelledby="wager-book-title">
+  <h2 id="wager-book-title">对赌记录</h2>
+  <p id="wager-settlement" role="status"></p>
+  <div id="wager-list"></div>
+  <form method="dialog" class="rent-warning-actions"><button>关闭</button></form>
+</dialog>
+<dialog id="preorder-offer" aria-labelledby="preorder-offer-title">
+  <h2 id="preorder-offer-title">预订商</h2>
+  <p id="preorder-terms"></p>
+  <p id="preorder-stock"></p>
+  <div class="preorder-forecast"><strong id="preorder-mini"></strong><strong id="preorder-small"></strong></div>
+  <p id="preorder-value"></p>
+  <form method="dialog" class="rent-warning-actions">
+    <button value="decline">婉拒</button><button value="accept">签预订</button>
+  </form>
+</dialog>
+<dialog id="preorder-menu" aria-labelledby="preorder-menu-title">
+  <h2 id="preorder-menu-title">预订箱</h2>
+  <p>预留的杯子会留给预订商，到期日可交货，收摊时会结算未完成的订单。</p>
+  <div id="preorder-list"></div>
+  <form method="dialog" class="rent-warning-actions"><button>关闭</button></form>
+</dialog>
+<dialog id="wholesale-menu" aria-labelledby="wholesale-title">
+  <h2 id="wholesale-title">批发商</h2>
+  <p id="wholesale-terms"></p>
+  <form method="dialog" class="rent-warning-actions">
+    <button value="decline" autofocus>不同意</button>
+    <button value="accept">同意收购</button>
+  </form>
+</dialog>
+<dialog id="merchant-menu" aria-labelledby="merchant-title">
+  <div class="upgrade-heading"><h2 id="merchant-title">箱子商人</h2><button id="close-merchant" type="button" aria-label="关闭报价">×</button></div>
+  <div id="merchant-offers"></div>
+  <p id="merchant-status" role="status"></p>
+</dialog>
+<dialog id="inventory-menu" aria-labelledby="inventory-title">
+  <div class="upgrade-heading"><h2 id="inventory-title">仓库</h2><button id="close-inventory" type="button" aria-label="关闭仓库">×</button></div>
+  <div id="inventory-grid"></div>
+  <p id="inventory-status" role="status"></p>
+</dialog>
+<dialog id="influencer-menu" aria-labelledby="influencer-title">
+  <h2 id="influencer-title">应用价格影响器？</h2>
+  <p id="influencer-terms"></p>
+  <form method="dialog" class="rent-warning-actions">
+    <button value="cancel" autofocus>取消</button>
+    <button value="apply" class="influencer-apply">应用</button>
+  </form>
+</dialog>
+<dialog id="scavenge-menu" aria-labelledby="scavenge-title">
+  <div class="upgrade-heading"><h2 id="scavenge-title">拾荒</h2><button id="close-scavenge" type="button" aria-label="关闭拾荒面板">×</button></div>
+  <p>去路边找别人丢下的箱子。优先使用无负面影响的次数。用完后，每拾荒一次，明天就少一位顾客。</p>
+  <p id="scavenge-prizes"></p>
+  <p id="scavenge-count">明天预计有 <strong id="scavenge-customers"></strong> 位顾客 · 剩余 <strong id="scavenge-attempts" class="story-keyword"></strong> 次拾荒机会</p>
+  <p id="scavenge-free-count" hidden>其中 <strong id="scavenge-free-attempts" class="story-keyword"></strong> 次不会减少明天的顾客</p>
+  <p id="scavenge-chance">下次成功率 <strong id="scavenge-percent" class="story-amount"></strong></p>
+  <p id="scavenge-exhausted" hidden>今天的拾荒机会已用完</p>
+  <p id="scavenge-result" role="status"></p>
+  <button id="try-scavenge" class="primary-action" type="button">拾荒</button>
+</dialog>
+<dialog id="close-day-warning" aria-labelledby="close-day-warning-title" aria-describedby="close-day-warning-detail">
+  <h2 id="close-day-warning-title">提前收摊</h2>
+  <p id="close-day-warning-detail"></p>
+  <form method="dialog" class="rent-warning-actions">
+    <button value="cancel" autofocus>取消</button>
+    <button value="confirm">确认收摊</button>
+  </form>
+</dialog>
+<dialog id="rent-warning" aria-labelledby="rent-warning-title" aria-describedby="rent-warning-detail">
+  <div class="rent-warning-heading">
+    <span aria-hidden="true">×</span>
+    <h2 id="rent-warning-title"></h2>
+  </div>
+  <p id="rent-warning-detail"></p>
+  <p>还要继续吗？</p>
+  <form method="dialog" class="rent-warning-actions">
+    <button value="cancel" autofocus>取消</button>
+    <button value="confirm">确定</button>
+  </form>
+</dialog>
+<dialog id="rent-failure" aria-labelledby="rent-failure-title" aria-describedby="rent-failure-detail">
+  <h2 id="rent-failure-title">租金不足，营业结束</h2>
+  <p id="rent-failure-detail"></p>
+  <button id="restart-shop" type="button">返回主界面</button>
+</dialog>
+<dialog id="buy-shop" aria-labelledby="buy-shop-title" aria-describedby="buy-shop-detail">
+  <h2 id="buy-shop-title">买下这家店？</h2>
+  <p id="buy-shop-detail">你已经攒够了 10000 金币。要把这家店买下来吗？</p>
+  <button id="confirm-buy-shop" class="primary-action" type="button">买下来</button>
+</dialog>
+<div id="day-banner" role="status" hidden></div></main>
+<div id="shop-tools" hidden>
+<aside id="shop-test" aria-label="测试">
+  <strong>测试</strong>
+  <button id="open-prop-catalog" type="button" aria-haspopup="dialog">道具一览</button>
+  <hr>
+  <button type="button" data-test-box="3">添加迷你箱</button>
+  <button type="button" data-test-box="0">添加小箱</button>
+  <button type="button" data-test-box="1">添加中箱</button>
+  <button type="button" data-test-box="2">添加大箱</button>
+</aside>
+<aside id="shop-assist" aria-label="辅助">
+  <strong>辅助</strong>
+  <label><input id="auto-mix" type="checkbox" autocomplete="off"> 自动配单</label>
+  <label><input id="box-auto-mix" type="checkbox" autocomplete="off"> 箱子内自动配单<br>（推荐开启）</label>
+  <fieldset id="auto-sale-exclusions"><legend>自动配单禁售商品</legend></fieldset>
+  <label><input id="auto-dismiss-excluded" type="checkbox" autocomplete="off" checked disabled> 不卖自动撵走</label>
+  <fieldset id="cup-priority">
+    <legend>配单优先级</legend>
+    <label><input type="checkbox" autocomplete="off" name="cup-priority" value="2"> 优先迷你杯</label>
+    <label><input type="checkbox" autocomplete="off" name="cup-priority" value="3"> 优先小杯</label>
+  </fieldset>
+</aside>
+</div>
+<script src="art-01/bottle-art.js"></script><script src="art-01/ink-stroke.js"></script><script src="heap-rules.js"></script><script src="shop.js?v=wager-tiers"></script></body></html>
